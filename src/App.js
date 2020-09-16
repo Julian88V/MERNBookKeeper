@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreateProperty from "./components/create-property.component";
 import EditProperty from "./components/edit-property.component";
 import BookList from "./components/book-list.component";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

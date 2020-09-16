@@ -4,34 +4,34 @@ export default class CreateProperty extends Component {
     constructor(props) {
         super(props);
 
-        this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
-        this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
-        this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
+        this.onChangePropertyDescription = this.onChangePropertyDescription.bind(this);
+        this.onChangePropertyResponsible = this.onChangePropertyResponsible.bind(this);
+        this.onChangePropertyPriority = this.onChangeProperyPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            todo_description: '',
-            todo_responsible: '',
-            todo_priority: '',
-            todo_completed: false
+            property_description: '',
+            property_responsible: '',
+            property_priority: '',
+            property_completed: false
         }
     }
 
-    onChangeTodoDescription(e) {
+    onChangePropertyDescription(e) {
         this.setState({
-            todo_description: e.target.value
+            property_description: e.target.value
         });
     }
 
-    onChangeTodoResponsible(e) {
+    onChangePropertyResponsible(e) {
         this.setState({
-            todo_responsible: e.target.value
+            property_responsible: e.target.value
         });
     }
 
-    onChangeTodoPriority(e) {
+    onChangePropertyPriority(e) {
         this.setState({
-            todo_priority: e.target.value
+            property_priority: e.target.value
         });
     }
 
@@ -39,29 +39,29 @@ export default class CreateProperty extends Component {
         e.preventDefault();
         
         console.log(`Form submitted:`);
-        console.log(`Todo Description: ${this.state.todo_description}`);
-        console.log(`Todo Responsible: ${this.state.todo_responsible}`);
-        console.log(`Todo Priority: ${this.state.todo_priority}`);
+        console.log(`Property Description: ${this.state.property_description}`);
+        console.log(`Property Responsible: ${this.state.property_responsible}`);
+        console.log(`Property Priority: ${this.state.property_priority}`);
         
         this.setState({
-            todo_description: '',
-            todo_responsible: '',
-            todo_priority: '',
-            todo_completed: false
+            property_description: '',
+            property_responsible: '',
+            property_priority: '',
+            property_completed: false
         })
     }
 
     render() {
         return (
             <div style={{marginTop: 10}}>
-                <h3>Create New Todo</h3>
+                <h3>Create New Property</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>Description: </label>
                         <input  type="text"
                                 className="form-control"
-                                value={this.state.todo_description}
-                                onChange={this.onChangeTodoDescription}
+                                value={this.state.property_description}
+                                onChange={this.onChangePropertyDescription}
                                 />
                     </div>
                     <div className="form-group">
@@ -69,8 +69,8 @@ export default class CreateProperty extends Component {
                         <input 
                                 type="text" 
                                 className="form-control"
-                                value={this.state.todo_responsible}
-                                onChange={this.onChangeTodoResponsible}
+                                value={this.state.property_responsible}
+                                onChange={this.onChangePropertyResponsible}
                                 />
                     </div>
                     <div className="form-group">
@@ -80,8 +80,8 @@ export default class CreateProperty extends Component {
                                     name="priorityOptions" 
                                     id="priorityLow" 
                                     value="Low"
-                                    checked={this.state.todo_priority==='Low'} 
-                                    onChange={this.onChangeTodoPriority}
+                                    checked={this.state.property_priority==='Low'} 
+                                    onChange={this.onChangePropertyPriority}
                                     />
                             <label className="form-check-label">Low</label>
                         </div>
@@ -91,8 +91,8 @@ export default class CreateProperty extends Component {
                                     name="priorityOptions" 
                                     id="priorityMedium" 
                                     value="Medium" 
-                                    checked={this.state.todo_priority==='Medium'} 
-                                    onChange={this.onChangeTodoPriority}
+                                    checked={this.state.property_priority==='Medium'} 
+                                    onChange={this.onChangePropertyPriority}
                                     />
                             <label className="form-check-label">Medium</label>
                         </div>
@@ -102,15 +102,15 @@ export default class CreateProperty extends Component {
                                     name="priorityOptions" 
                                     id="priorityHigh" 
                                     value="High" 
-                                    checked={this.state.todo_priority==='High'} 
-                                    onChange={this.onChangeTodoPriority}
+                                    checked={this.state.property_priority==='High'} 
+                                    onChange={this.onChangePropertyPriority}
                                     />
                             <label className="form-check-label">High</label>
                         </div>
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Create Todo" className="btn btn-primary" />
+                        <input type="submit" value="Create Property" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
