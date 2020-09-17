@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreateProperty extends Component {
     constructor(props) {
@@ -6,7 +7,7 @@ export default class CreateProperty extends Component {
 
         this.onChangePropertyDescription = this.onChangePropertyDescription.bind(this);
         this.onChangePropertyResponsible = this.onChangePropertyResponsible.bind(this);
-        this.onChangePropertyPriority = this.onChangeProperyPriority.bind(this);
+        this.onChangePropertyPriority = this.onChangePropertyPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -43,6 +44,16 @@ export default class CreateProperty extends Component {
         console.log(`Property Responsible: ${this.state.property_responsible}`);
         console.log(`Property Priority: ${this.state.property_priority}`);
         
+        const newProperty = {
+            property_description: this.state.property_description,
+            property_responsible: this.state.property_responsible,
+            property_priority: this.state.property_priority,
+            property_completed: this.state.property_completed
+        };
+
+        axios.post('http://localhost:4000/book/add', newProperty)
+            .then(res => console.log(res.data));
+
         this.setState({
             property_description: '',
             property_responsible: '',
