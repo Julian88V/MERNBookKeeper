@@ -60,6 +60,9 @@ export default class CreateProperty extends Component {
             property_priority: '',
             property_completed: false
         })
+
+        this.props.history.push('/');
+        window.location.reload(false);
     }
 
     render() {
