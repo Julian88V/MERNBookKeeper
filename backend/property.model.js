@@ -16,4 +16,4 @@ let Property = new Schema({
     }
 });
 
-module.exports = mongoose.model('Property', Property);
+module.exports = mongoose.model('properties', Property, 'properties');

@@ -5,9 +5,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const propertyRoutes = express.Router();
 const PORT = 4000;
+const passport = require("passport");
 
-let Property = require('./property.model');
-
+let User = require('./api/usersApi')
+module.exports = {
+    Property: require('./property.model'),
+    
+}
 app.use(cors());
 app.use(
     bodyParser.urlencoded({
@@ -16,7 +20,7 @@ app.use(
   );
 app.use(bodyParser.json());
 
-const db = require("../config/keys").mongoURI;
+const db = require("./config/keys").mongoURI;
 
 mongoose.connect(db, { useNewUrlParser: true });
 const connection = mongoose.connection;
@@ -26,7 +30,7 @@ connection.once('open', function() {
 })
 
 propertyRoutes.route('/').get(function(req, res) {
-    Property.find(function(err, properties) {
+    module.exports.Property.find(function(err, properties) {
         if (err) {
             console.log(err);
         } else {
@@ -37,13 +41,13 @@ propertyRoutes.route('/').get(function(req, res) {
 
 propertyRoutes.route('/:id').get(function(req, res) {
     let id = req.params.id;
-    Property.findById(id, function(err, property) {
+    module.exports.Property.findById(id, function(err, property) {
         res.json(property);
     });
 });
 
 propertyRoutes.route('/update/:id').post(function(req, res) {
-    Property.findById(req.params.id, function(err, property) {
+    module.exports.Property.findById(req.params.id, function(err, property) {
         if (!property)
             res.status(404).send("data is not found");
         else
@@ -62,7 +66,7 @@ propertyRoutes.route('/update/:id').post(function(req, res) {
 });
 
 propertyRoutes.route('/add').post(function(req, res) {
-    let property = new Property(req.body);
+    let property = new module.exports.Property(req.body);
     property.save()
         .then(property => {
             res.status(200).json({'property': 'property added successfully'});
@@ -72,7 +76,13 @@ propertyRoutes.route('/add').post(function(req, res) {
         });
 });
 
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require('./config/passport')(passport);
+
 app.use('/book', propertyRoutes);
+app.use('/api/users', User);
 
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
