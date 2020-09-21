@@ -18,6 +18,8 @@ export default class EditProperty extends Component {
             property_priority: '',
             property_completed: false
         }
+
+        this.handleAlternate = this.handleAlternate.bind(this)
     }
 
     componentDidMount() {
@@ -71,7 +73,26 @@ export default class EditProperty extends Component {
         axios.post('http://localhost:4000/book/update/'+this.props.match.params.id, obj)
             .then(res => console.log(res.data));
         
-        this.props.history.push('/');
+        this.props.history.push('/properties');
+        window.location.reload(false);
+    }
+
+    // deleteProperty(){
+    //     axios.delete('http://localhost:4000/book/delete/'+this.props.match.params.id)
+    //     .then((res) => {
+    //         console.log('Property successfully deleted!')
+    //     }).catch((error) => {
+    //         console.log(error)
+    //     })
+    // }
+
+    handleAlternate(e) {
+        e.preventDefault();
+        
+        axios.delete('http://localhost:4000/book/delete/'+this.props.match.params.id)
+            .then(res => console.log(res.data));
+        
+        this.props.history.push('/properties');
         window.location.reload(false);
     }
 
@@ -150,6 +171,7 @@ export default class EditProperty extends Component {
 
                     <div className="form-group">
                         <input type="submit" value="Update Property" className="btn btn-primary" />
+                        <button onClick={this.handleAlternate.bind(this)}>Delete </button>
                     </div>
                 </form>
             </div>

@@ -61,7 +61,7 @@ export default class CreateProperty extends Component {
             property_completed: false
         })
 
-        this.props.history.push('/');
+        this.props.history.push('/properties');
         window.location.reload(false);
     }
 

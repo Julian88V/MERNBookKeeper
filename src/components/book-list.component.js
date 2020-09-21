@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
 
 const Property = props => (
     <tr>
@@ -8,12 +11,19 @@ const Property = props => (
         <td>{props.property.property_responsible}</td>
         <td>{props.property.property_priority}</td>
         <td>
-            <Link to={"/edit/"+props.property._id}>Edit</Link>
+            <Link 
+            to={"/edit/"+props.property._id} 
+            className="btn btn-small waves-effect waves-teal hoverable orange accent-3"
+            >Edit</Link>
         </td>
     </tr>
 )
 
-export default class BookList extends Component {
+class BookList extends Component {
+    onLogoutClick = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+      };
     constructor(props) {
         super(props);
         this.state = {properties: []};
@@ -52,7 +62,31 @@ export default class BookList extends Component {
                         { this.propertyList() }
                     </tbody>
                 </table>
+                <button
+              style={{
+                width: "150px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px",
+                marginTop: "1rem"
+              }}
+              onClick={this.onLogoutClick}
+              className="btn btn-large waves-effect waves-orange hoverable purple accent-3"
+            >
+              Logout
+            </button>
             </div>
+            
         )
     }
 }
+BookList.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  };
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
+  export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(BookList);

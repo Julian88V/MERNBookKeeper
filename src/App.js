@@ -12,7 +12,6 @@ import store from "./store";
 import CreateProperty from "./components/create-property.component";
 import EditProperty from "./components/edit-property.component";
 import BookList from "./components/book-list.component";
-import Navbar from "./components/layout/navbar";
 import Landing from "./components/layout/landing";
 import Register from "./components/auth/register";
 import Login from "./components/auth/login";
@@ -46,11 +45,11 @@ function App() {
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             
-            <Link to="/" className="navbar-brand">MERN-Stack Book App</Link>
+            <h6 className="navbar-brand">MERN-Stack Book Keeper App</h6>
             <div className="collpase navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
-                  <Link to="/" className="nav-link">Properties</Link>
+                  <Link to="/properties" className="nav-link">Properties</Link>
                 </li>
                 <li className="navbar-item">
                   <Link to="/create" className="nav-link">Create Property</Link>
@@ -59,15 +58,15 @@ function App() {
             </div>
           </nav>
           <br/>
-          <Navbar />
-          <Route path="/" exact component={BookList} />
-          <Route path="/edit/:id" component={EditProperty} />
-          <Route path="/create" component={CreateProperty} />
-          <Route exact path="/landing" component={Landing} />
+          
+          <Route exact path="/" component={Landing} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="/properties" exact component={BookList} />
+          <PrivateRoute path="/edit/:id" component={EditProperty} />
+          <PrivateRoute path="/create" component={CreateProperty} />
             </Switch>
         </div>
       </Router>

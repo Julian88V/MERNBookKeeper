@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "book-install": "npm install --prefix book",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "book": "npm start --prefix book",
+    "dev": "concurrently \"npm run server\" \"npm run book\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
