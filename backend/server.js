@@ -134,6 +134,7 @@ propertyRoutes.route('/update/:id').post(function(req, res) {
             res.status(404).send("data is not found");
         else
         property.property_description = req.body.property_description;
+        property.property_tenant = req.body.property_tenant;
         property.property_responsible = req.body.property_responsible;
         property.property_priority = req.body.property_priority;
         property.property_completed = req.body.property_completed;
