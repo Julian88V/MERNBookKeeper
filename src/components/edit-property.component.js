@@ -7,6 +7,7 @@ export default class EditProperty extends Component {
         super(props);
 
         this.onChangePropertyDescription = this.onChangePropertyDescription.bind(this);
+        this.onChangePropertyTenant = this.onChangePropertyTenant.bind(this);
         this.onChangePropertyResponsible = this.onChangePropertyResponsible.bind(this);
         this.onChangePropertyPriority = this.onChangePropertyPriority.bind(this);
         this.onChangePropertyCompleted = this.onChangePropertyCompleted.bind(this);
@@ -14,6 +15,7 @@ export default class EditProperty extends Component {
 
         this.state = {
             property_description: '',
+            property_tenant: '',
             property_responsible: '',
             property_priority: '',
             property_completed: false
@@ -27,6 +29,7 @@ export default class EditProperty extends Component {
             .then(response => {
                 this.setState({
                     property_description: response.data.property_description,
+                    property_tenant: response.data.property_tenant,
                     property_responsible: response.data.property_responsible,
                     property_priority: response.data.property_priority,
                     property_completed: response.data.property_completed
@@ -40,6 +43,12 @@ export default class EditProperty extends Component {
     onChangePropertyDescription(e) {
         this.setState({
             property_description: e.target.value
+        });
+    }
+
+    onChangePropertyTenant(e) {
+        this.setState({
+            property_tenant: e.target.value
         });
     }
 
@@ -101,16 +110,25 @@ export default class EditProperty extends Component {
             <div>
                 <h3 align="center">Update Property</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group"> 
-                        <label>Description: </label>
+                    <div className="input-field"> 
+                        <label class="active">Description: </label>
                         <input  type="text"
                                 className="form-control"
                                 value={this.state.property_description}
                                 onChange={this.onChangePropertyDescription}
                                 />
                     </div>
-                    <div className="form-group">
-                        <label>Responsible: </label>
+                    <div className="input-field">
+                        <label class="active">Tenant: </label>
+                        <input 
+                                type="text" 
+                                className="form-control"
+                                value={this.state.property_tenant}
+                                onChange={this.onChangePropertyTenant}
+                                />
+                    </div>
+                    <div className="input-field">
+                        <label class="active">Responsible: </label>
                         <input 
                                 type="text" 
                                 className="form-control"
@@ -120,7 +138,8 @@ export default class EditProperty extends Component {
                     </div>
                     <div className="form-group">
                         <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
+                        <label>
+                            <input  class="with-gap" 
                                     type="radio" 
                                     name="priorityOptions" 
                                     id="priorityLow" 
@@ -128,10 +147,12 @@ export default class EditProperty extends Component {
                                     checked={this.state.property_priority==='Low'} 
                                     onChange={this.onChangePropertyPriority}
                                     />
-                            <label className="form-check-label">Low</label>
+                                <span>Low</span>
+                            </label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
+                        <label>
+                            <input  className="with-gap" 
                                     type="radio" 
                                     name="priorityOptions" 
                                     id="priorityMedium" 
@@ -139,10 +160,12 @@ export default class EditProperty extends Component {
                                     checked={this.state.property_priority==='Medium'} 
                                     onChange={this.onChangePropertyPriority}
                                     />
-                            <label className="form-check-label">Medium</label>
+                                <span>Medium</span>
+                            </label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
+                        <label>
+                            <input  className="with-gap" 
                                     type="radio" 
                                     name="priorityOptions" 
                                     id="priorityHigh" 
@@ -150,10 +173,12 @@ export default class EditProperty extends Component {
                                     checked={this.state.property_priority==='High'} 
                                     onChange={this.onChangePropertyPriority}
                                     />
-                            <label className="form-check-label">High</label>
+                                <span>High</span>
+                            </label>
                         </div>
                     </div>
                     <div className="form-check">
+                    <label className="form-check-label" htmlFor="completedCheckbox">
                         <input  className="form-check-input"
                                 id="completedCheckbox"
                                 type="checkbox"
@@ -162,8 +187,8 @@ export default class EditProperty extends Component {
                                 checked={this.state.property_completed}
                                 value={this.state.property_completed}
                                 />
-                        <label className="form-check-label" htmlFor="completedCheckbox">
-                            Completed
+                        
+                           <span>Completed</span>
                         </label>                        
                     </div>
 
@@ -171,7 +196,7 @@ export default class EditProperty extends Component {
 
                     <div className="form-group">
                         <input type="submit" value="Update Property" className="btn btn-primary" />
-                        <button onClick={this.handleAlternate.bind(this)}>Delete </button>
+                        <button onClick={this.handleAlternate.bind(this)} className="btn btn-danger">Delete Property</button>
                     </div>
                 </form>
             </div>

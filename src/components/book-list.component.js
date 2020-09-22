@@ -7,7 +7,9 @@ import { logoutUser } from "../actions/authActions";
 
 const Property = props => (
     <tr>
+        <td>{props.property.property_address}</td>
         <td>{props.property.property_description}</td>
+        <td>{props.property.property_tenant}</td>
         <td>{props.property.property_responsible}</td>
         <td>{props.property.property_priority}</td>
         <td>
@@ -52,10 +54,12 @@ class BookList extends Component {
                 <table className="table table-striped" style={{ marginTop: 20 }} >
                     <thead>
                         <tr>
+                            <th>Address</th>
                             <th>Description</th>
+                            <th>Tenant</th>
                             <th>Responsible</th>
                             <th>Priority</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

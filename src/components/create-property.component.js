@@ -5,22 +5,38 @@ export default class CreateProperty extends Component {
     constructor(props) {
         super(props);
 
+        this.onChangePropertyAddress = this.onChangePropertyAddress.bind(this);
         this.onChangePropertyDescription = this.onChangePropertyDescription.bind(this);
+        this.onChangePropertyTenant = this.onChangePropertyTenant.bind(this);
         this.onChangePropertyResponsible = this.onChangePropertyResponsible.bind(this);
         this.onChangePropertyPriority = this.onChangePropertyPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            property_address: '',
             property_description: '',
+            property_tenant: '',
             property_responsible: '',
             property_priority: '',
             property_completed: false
         }
     }
 
+    onChangePropertyAddress(e) {
+        this.setState({
+            property_address: e.target.value
+        });
+    }
+    
     onChangePropertyDescription(e) {
         this.setState({
             property_description: e.target.value
+        });
+    }
+
+    onChangePropertyTenant(e) {
+        this.setState({
+            property_tenant: e.target.value
         });
     }
 
@@ -40,12 +56,16 @@ export default class CreateProperty extends Component {
         e.preventDefault();
         
         console.log(`Form submitted:`);
+        console.log(`Property Address: ${this.state.property_address}`);
         console.log(`Property Description: ${this.state.property_description}`);
+        console.log(`Property Tenant: ${this.state.property_tenant}`);
         console.log(`Property Responsible: ${this.state.property_responsible}`);
         console.log(`Property Priority: ${this.state.property_priority}`);
         
         const newProperty = {
+            property_address: this.state.property_address,
             property_description: this.state.property_description,
+            property_tenant: this.state.property_tenant,
             property_responsible: this.state.property_responsible,
             property_priority: this.state.property_priority,
             property_completed: this.state.property_completed
@@ -55,7 +75,9 @@ export default class CreateProperty extends Component {
             .then(res => console.log(res.data));
 
         this.setState({
+            property_address: '',
             property_description: '',
+            property_tenant: '',
             property_responsible: '',
             property_priority: '',
             property_completed: false
@@ -70,16 +92,32 @@ export default class CreateProperty extends Component {
             <div style={{marginTop: 10}}>
                 <h3>Create New Property</h3>
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group"> 
-                        <label>Description: </label>
+                <div className="input-field"> 
+                        <label class="active">Address: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.property_address}
+                                onChange={this.onChangePropertyAddress}
+                                />
+                    </div>
+                    <div className="input-field"> 
+                        <label class="active">Description: </label>
                         <input  type="text"
                                 className="form-control"
                                 value={this.state.property_description}
                                 onChange={this.onChangePropertyDescription}
                                 />
                     </div>
-                    <div className="form-group">
-                        <label>Responsible: </label>
+                    <div className="input-field"> 
+                        <label class="active">Tenant: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.property_tenant}
+                                onChange={this.onChangePropertyTenant}
+                                />
+                    </div>
+                    <div className="input-field">
+                        <label class="active">Responsible: </label>
                         <input 
                                 type="text" 
                                 className="form-control"
@@ -89,7 +127,8 @@ export default class CreateProperty extends Component {
                     </div>
                     <div className="form-group">
                         <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
+                            <label>
+                            <input  className="with-gap" 
                                     type="radio" 
                                     name="priorityOptions" 
                                     id="priorityLow" 
@@ -97,10 +136,12 @@ export default class CreateProperty extends Component {
                                     checked={this.state.property_priority==='Low'} 
                                     onChange={this.onChangePropertyPriority}
                                     />
-                            <label className="form-check-label">Low</label>
+                            <span>Low</span>
+                            </label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
+                            <label>
+                            <input  className="with-gap" 
                                     type="radio" 
                                     name="priorityOptions" 
                                     id="priorityMedium" 
@@ -108,10 +149,12 @@ export default class CreateProperty extends Component {
                                     checked={this.state.property_priority==='Medium'} 
                                     onChange={this.onChangePropertyPriority}
                                     />
-                            <label className="form-check-label">Medium</label>
+                            <span >Medium</span>
+                            </label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input  className="form-check-input" 
+                            <label>
+                            <input  className="with-gap" 
                                     type="radio" 
                                     name="priorityOptions" 
                                     id="priorityHigh" 
@@ -119,7 +162,8 @@ export default class CreateProperty extends Component {
                                     checked={this.state.property_priority==='High'} 
                                     onChange={this.onChangePropertyPriority}
                                     />
-                            <label className="form-check-label">High</label>
+                            <span>High</span>
+                            </label>
                         </div>
                     </div>
 
