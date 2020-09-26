@@ -8,6 +8,7 @@ export default class CreateProperty extends Component {
         this.onChangePropertyAddress = this.onChangePropertyAddress.bind(this);
         this.onChangePropertyDescription = this.onChangePropertyDescription.bind(this);
         this.onChangePropertyTenant = this.onChangePropertyTenant.bind(this);
+        this.onChangePropertyIncome = this.onChangePropertyIncome.bind(this);
         this.onChangePropertyResponsible = this.onChangePropertyResponsible.bind(this);
         this.onChangePropertyPriority = this.onChangePropertyPriority.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -16,6 +17,7 @@ export default class CreateProperty extends Component {
             property_address: '',
             property_description: '',
             property_tenant: '',
+            property_income: '',
             property_responsible: '',
             property_priority: '',
             property_completed: false
@@ -40,6 +42,12 @@ export default class CreateProperty extends Component {
         });
     }
 
+    onChangePropertyIncome(e) {
+        this.setState({
+            property_income: e.target.value
+        });
+    }
+
     onChangePropertyResponsible(e) {
         this.setState({
             property_responsible: e.target.value
@@ -59,6 +67,7 @@ export default class CreateProperty extends Component {
         console.log(`Property Address: ${this.state.property_address}`);
         console.log(`Property Description: ${this.state.property_description}`);
         console.log(`Property Tenant: ${this.state.property_tenant}`);
+        console.log(`Property Income: ${this.state.property_income}`);
         console.log(`Property Responsible: ${this.state.property_responsible}`);
         console.log(`Property Priority: ${this.state.property_priority}`);
         
@@ -66,6 +75,7 @@ export default class CreateProperty extends Component {
             property_address: this.state.property_address,
             property_description: this.state.property_description,
             property_tenant: this.state.property_tenant,
+            property_income: this.state.property_income,
             property_responsible: this.state.property_responsible,
             property_priority: this.state.property_priority,
             property_completed: this.state.property_completed
@@ -78,6 +88,7 @@ export default class CreateProperty extends Component {
             property_address: '',
             property_description: '',
             property_tenant: '',
+            property_income: '',
             property_responsible: '',
             property_priority: '',
             property_completed: false
@@ -114,6 +125,14 @@ export default class CreateProperty extends Component {
                                 className="form-control"
                                 value={this.state.property_tenant}
                                 onChange={this.onChangePropertyTenant}
+                                />
+                    </div>
+                    <div className="input-field"> 
+                        <label class="active">Monthly Income: </label>
+                        <input  type="number"
+                                className="form-control"
+                                value={this.state.property_income}
+                                onChange={this.onChangePropertyIncome}
                                 />
                     </div>
                     <div className="input-field">

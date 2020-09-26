@@ -74,6 +74,7 @@ export default class EditProperty extends Component {
         e.preventDefault();
         const obj = {
             property_description: this.state.property_description,
+            property_tenant: this.state.property_tenant,
             property_responsible: this.state.property_responsible,
             property_priority: this.state.property_priority,
             property_completed: this.state.property_completed
@@ -99,7 +100,11 @@ export default class EditProperty extends Component {
         e.preventDefault();
         
         axios.delete('http://localhost:4000/book/delete/'+this.props.match.params.id)
-            .then(res => console.log(res.data));
+        .then((res) => {
+                    console.log('Property successfully deleted!')
+                }).catch((error) => {
+                    console.log(error)
+                })
         
         this.props.history.push('/properties');
         window.location.reload(false);
@@ -111,7 +116,7 @@ export default class EditProperty extends Component {
                 <h3 align="center">Update Property</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="input-field"> 
-                        <label class="active">Description: </label>
+                        <label className="active">Description: </label>
                         <input  type="text"
                                 className="form-control"
                                 value={this.state.property_description}
@@ -119,7 +124,7 @@ export default class EditProperty extends Component {
                                 />
                     </div>
                     <div className="input-field">
-                        <label class="active">Tenant: </label>
+                        <label className="active">Tenant: </label>
                         <input 
                                 type="text" 
                                 className="form-control"
@@ -128,7 +133,7 @@ export default class EditProperty extends Component {
                                 />
                     </div>
                     <div className="input-field">
-                        <label class="active">Responsible: </label>
+                        <label className="active">Responsible: </label>
                         <input 
                                 type="text" 
                                 className="form-control"
@@ -139,7 +144,7 @@ export default class EditProperty extends Component {
                     <div className="form-group">
                         <div className="form-check form-check-inline">
                         <label>
-                            <input  class="with-gap" 
+                            <input  className="with-gap" 
                                     type="radio" 
                                     name="priorityOptions" 
                                     id="priorityLow" 

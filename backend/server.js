@@ -160,7 +160,7 @@ propertyRoutes.route('/add').post(function(req, res) {
 });
 
 propertyRoutes.route('/delete/:id').delete(function(req, res) {
-    module.exports.Property.findById(req.params.id, function(err, property) {
+    module.exports.Property.findByIdAndRemove(req.params.id, function(err, property) {
       if (err) {
         console.log(err);
       } else {

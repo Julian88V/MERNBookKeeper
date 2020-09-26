@@ -10,6 +10,7 @@ const Property = props => (
         <td>{props.property.property_address}</td>
         <td>{props.property.property_description}</td>
         <td>{props.property.property_tenant}</td>
+        <td>{props.property.property_income}</td>
         <td>{props.property.property_responsible}</td>
         <td>{props.property.property_priority}</td>
         <td>
@@ -57,6 +58,7 @@ class BookList extends Component {
                             <th>Address</th>
                             <th>Description</th>
                             <th>Tenant</th>
+                            <th>Monthly Income</th>
                             <th>Responsible</th>
                             <th>Priority</th>
                             <th></th>
